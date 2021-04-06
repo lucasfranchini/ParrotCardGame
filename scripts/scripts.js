@@ -1,4 +1,5 @@
-let numero_cartas =14;
+let numero_cartas =14, numero_viradas =0,acertos =0,numero_jogadas =0;
+let i_viradas =[];
 const deck = document.querySelector(".campo");
 while(numero_cartas<4 || numero_cartas>14 || numero_cartas%2 === 1){
     numero_cartas = parseInt(prompt("com quantas cartas você quer jogar"));
@@ -19,6 +20,41 @@ for (let i=0,imagen_escolhida = 1;i<numero_cartas;i++){
     cartas[i].querySelectorAll("img")[1].setAttribute("src",`imagens/${imagen_escolhida}.gif`)
 }
 function virar(i){
+    i_viradas[numero_viradas]=i;
+    numero_viradas ++;
+    numero_jogadas++;
+    
     cartas[i].querySelectorAll("img")[0].classList.toggle("frente");
-    cartas[i].querySelectorAll("img")[1].classList.toggle("frente");
+    cartas[i].querySelectorAll("img")[1].classList.toggle("virada");
+    
+    if(numero_viradas ===2){
+        let viradas=document.querySelectorAll(".campo .carta .virada");
+        numero_viradas= 0;
+        if(viradas[1].outerHTML === viradas[0].outerHTML){
+            viradas[0].classList.remove("virada");
+            viradas[1].classList.remove("virada");
+            viradas[0].classList.add("acertadas");
+            viradas[1].classList.add("acertadas");
+            acertos += 2;
+        }
+        else{
+            document.querySelector(".campo").classList.add("esperando");
+            setTimeout(desvirar,1000,viradas,i_viradas);
+            
+        }
+        if(acertos === numero_cartas)
+        {
+            alert(`você ganhou em ${numero_jogadas} jogadas` );
+        }
+    }
+    
+}
+function desvirar (viradas,i_viradas){
+    
+    viradas[0].classList.remove("virada");
+    viradas[1].classList.remove("virada");
+    cartas[i_viradas[0]].querySelectorAll("img")[0].classList.toggle("frente");
+    cartas[i_viradas[1]].querySelectorAll("img")[0].classList.toggle("frente");
+    document.querySelector(".campo").classList.remove("esperando");
+    
 }
