@@ -7,8 +7,12 @@ while(numero_cartas<4 || numero_cartas>14 || numero_cartas%2 === 1){
 for (let i=0;i<numero_cartas;i++){
     deck.innerHTML = `${deck.innerHTML}  
     <div class="carta" onclick="virar(${i})">
-    <img src="imagens/front.png" alt="um papagaio" class="frente">
-    <img src="">
+        <div class="frente face">
+            <img src="imagens/front.png" alt="um papagaio" >
+        </div>
+        <div class="face">
+            <img src="">
+        </div>
     </div>`
 }
 const cartas = document.querySelectorAll(".campo .carta");
@@ -23,10 +27,8 @@ function virar(i){
     i_viradas[numero_viradas]=i;
     numero_viradas ++;
     numero_jogadas++;
-    
-    cartas[i].querySelectorAll("img")[0].classList.toggle("frente");
-    cartas[i].querySelectorAll("img")[1].classList.toggle("virada");
-    
+    cartas[i].querySelectorAll(".face")[0].classList.toggle("frente");
+    cartas[i].querySelectorAll(".face")[1].classList.toggle("virada"); 
     if(numero_viradas ===2){
         let viradas=document.querySelectorAll(".campo .carta .virada");
         numero_viradas= 0;
@@ -50,11 +52,10 @@ function virar(i){
     
 }
 function desvirar (viradas,i_viradas){
-    
     viradas[0].classList.remove("virada");
     viradas[1].classList.remove("virada");
-    cartas[i_viradas[0]].querySelectorAll("img")[0].classList.toggle("frente");
-    cartas[i_viradas[1]].querySelectorAll("img")[0].classList.toggle("frente");
+    cartas[i_viradas[0]].querySelectorAll(".face")[0].classList.toggle("frente");
+    cartas[i_viradas[1]].querySelectorAll(".face")[0].classList.toggle("frente");
     document.querySelector(".campo").classList.remove("esperando");
     
 }
