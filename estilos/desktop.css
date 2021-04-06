@@ -16,9 +16,10 @@ h1{
     margin-bottom: 47px;
 }
 .relogio{
+    margin-left: 40px;
     position: fixed;
-    top: 40px;
-    right: 40px;
+    top: 0;
+    right: 0;
 }
 .campo{
     display: flex;
@@ -68,7 +69,7 @@ h1{
         width: 100%;
     }
 }
-@media(max-width: 600px){
+@media(max-width: 750px){
     body{
         font-size: 36px;
         line-height: 42px;

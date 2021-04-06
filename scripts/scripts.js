@@ -1,4 +1,4 @@
-let numero_cartas =0, numero_viradas =0,acertos =0,numero_jogadas =0;
+let numero_cartas =14, numero_viradas =0,acertos =0,numero_jogadas =0;
 let i_viradas =[];
 let timer=0;
 const deck = document.querySelector(".campo");
@@ -28,8 +28,8 @@ let clock =setInterval(relogio,1000);
 function relogio(){
     timer++;
     const relogio = document.querySelector(".relogio")
-    let minutos = parseInt(timer/60);
-    let segundos =  timer%60;
+    const minutos = parseInt(timer/60);
+    const segundos =  timer%60;
     relogio.innerHTML = `${minutos}:${segundos}`;
 }
 function virar(i){
