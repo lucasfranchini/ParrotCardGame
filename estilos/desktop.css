@@ -35,10 +35,11 @@ h1{
 .carta img{
     width: 100px;
     height: 100px;
+    display: none;
 }
 
-.verso{
-    display: none;
+.carta .frente{
+    display: initial;
 }
 @media(max-width: 1110px){
     .campo{
