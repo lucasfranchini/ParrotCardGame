@@ -3,6 +3,7 @@ let i_viradas =[];
 let timer=0;
 const deck = document.querySelector(".campo");
 let clock;
+let aleatorio = [];
 iniciar();
 function iniciar (){
     while(numero_cartas<4 || numero_cartas>14 || numero_cartas%2 === 1){
@@ -20,12 +21,26 @@ function iniciar (){
         </div>`
     }
     const cartas = document.querySelectorAll(".campo .carta");
-
+    
+    for(let i=0,x;i<numero_cartas;i++){
+        x =Math.floor(Math.random() * numero_cartas ) ;
+        let j=0;
+        while(j<numero_cartas){
+            if(x===aleatorio[j]){
+                i--;
+                break;
+            }
+            j++;
+        }
+        if(j === numero_cartas){
+            aleatorio.push(x);
+        }
+    }
     for (let i=0,imagen_escolhida = 1;i<numero_cartas;i++){
         if(i%2 ===0 && i!== 0){
             imagen_escolhida++;
         }
-        cartas[i].querySelectorAll("img")[1].setAttribute("src",`imagens/${imagen_escolhida}.gif`)
+        cartas[aleatorio[i]].querySelectorAll("img")[1].setAttribute("src",`imagens/${imagen_escolhida}.gif`);
     }
     clock =setInterval(relogio,1000);
 }
@@ -60,12 +75,12 @@ function virar(i){
         if(acertos === numero_cartas)
         {
             clearInterval(clock);
-            alert(`você ganhou em ${numero_jogadas} jogadas e demorou ${timer} segundos` );
-            recomeçar();
+            setTimeout(recomeçar,300);
         }
     }
 }
 function recomeçar(){
+    alert(`você ganhou em ${numero_jogadas} jogadas e demorou ${timer} segundos` );
     const resposta =prompt("gostaria de jogar de novo?(sim ou não)");
     if(resposta === "sim"){
         numero_cartas =0;
@@ -75,6 +90,7 @@ function recomeçar(){
         i_viradas =[];
         timer=0;
         deck.innerHTML = "";
+        aleatorio = [];
         iniciar();
       }
 }
