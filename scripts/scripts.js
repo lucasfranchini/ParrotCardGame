@@ -18,23 +18,10 @@ function iniciar (){
                 <img src="">
             </div>
         </div>`
+        aleatorio.push(i);
     }
+    aleatorio.sort(comparador);
     const cartas = document.querySelectorAll(".campo .carta");
-    
-    for(let i=0,x;i<numero_cartas;i++){
-        x =Math.floor(Math.random() * numero_cartas ) ;
-        let j=0;
-        while(j<numero_cartas){
-            if(x===aleatorio[j]){
-                i--;
-                break;
-            }
-            j++;
-        }
-        if(j === numero_cartas){
-            aleatorio.push(x);
-        }
-    }
     for (let i=0,imagen_escolhida = 1;i<numero_cartas;i++){
         if(i%2 ===0 && i!== 0){
             imagen_escolhida++;
@@ -97,4 +84,7 @@ function desvirar (viradas){
     viradas[1].parentNode.children[0].classList.toggle("frente");
     document.querySelector(".campo").classList.remove("esperando");
     
+}
+function comparador() { 
+	return Math.random() - 0.5; 
 }
