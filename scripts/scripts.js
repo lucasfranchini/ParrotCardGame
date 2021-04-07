@@ -1,5 +1,4 @@
 let numero_cartas =0, numero_viradas =0,acertos =0,numero_jogadas =0;
-let i_viradas =[];
 let timer=0;
 const deck = document.querySelector(".campo");
 let clock;
@@ -11,7 +10,7 @@ function iniciar (){
     }
     for (let i=0;i<numero_cartas;i++){
         deck.innerHTML = `${deck.innerHTML}  
-        <div class="carta" onclick="virar(${i})">
+        <div class="carta" onclick="virar(this)">
             <div class="frente face">
                 <img src="imagens/front.png" alt="um papagaio" >
             </div>
@@ -51,13 +50,11 @@ function relogio(){
     const segundos =  timer%60;
     relogio.innerHTML = `${minutos}:${segundos}`;
 }
-function virar(i){
-    const cartas = document.querySelectorAll(".campo .carta");
-    i_viradas[numero_viradas]=i;
+function virar(cartavirada){
     numero_viradas ++;
     numero_jogadas++;
-    cartas[i].querySelectorAll(".face")[0].classList.toggle("frente");
-    cartas[i].querySelectorAll(".face")[1].classList.toggle("virada"); 
+    cartavirada.children[0].classList.toggle("frente");
+    cartavirada.children[1].classList.toggle("virada"); 
     if(numero_viradas ===2){
         const viradas=document.querySelectorAll(".campo .carta .virada");
         numero_viradas= 0;
@@ -70,7 +67,7 @@ function virar(i){
         }
         else{
             document.querySelector(".campo").classList.add("esperando");
-            setTimeout(desvirar,1000,viradas,i_viradas);
+            setTimeout(desvirar,1000,viradas);
         }
         if(acertos === numero_cartas)
         {
@@ -87,19 +84,17 @@ function recomeçar(){
         numero_viradas =0;
         acertos =0;
         numero_jogadas =0;
-        i_viradas =[];
         timer=0;
         deck.innerHTML = "";
         aleatorio = [];
         iniciar();
       }
 }
-function desvirar (viradas,i_viradas){
-    const cartas = document.querySelectorAll(".campo .carta");
+function desvirar (viradas){
     viradas[0].classList.remove("virada");
     viradas[1].classList.remove("virada");
-    cartas[i_viradas[0]].querySelectorAll(".face")[0].classList.toggle("frente");
-    cartas[i_viradas[1]].querySelectorAll(".face")[0].classList.toggle("frente");
+    viradas[0].parentNode.children[0].classList.toggle("frente");
+    viradas[1].parentNode.children[0].classList.toggle("frente");
     document.querySelector(".campo").classList.remove("esperando");
     
 }
