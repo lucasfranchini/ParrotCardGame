@@ -59,7 +59,7 @@ function virar(i){
     cartas[i].querySelectorAll(".face")[0].classList.toggle("frente");
     cartas[i].querySelectorAll(".face")[1].classList.toggle("virada"); 
     if(numero_viradas ===2){
-        let viradas=document.querySelectorAll(".campo .carta .virada");
+        const viradas=document.querySelectorAll(".campo .carta .virada");
         numero_viradas= 0;
         if(viradas[1].outerHTML === viradas[0].outerHTML){
             viradas[0].classList.remove("virada");
