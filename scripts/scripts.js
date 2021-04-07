@@ -58,7 +58,7 @@ function virar(cartavirada){
     if(numero_viradas ===2){
         const viradas=document.querySelectorAll(".campo .carta .virada");
         numero_viradas= 0;
-        if(viradas[1].outerHTML === viradas[0].outerHTML){
+        if(viradas[1].innerHTML === viradas[0].innerHTML){
             viradas[0].classList.remove("virada");
             viradas[1].classList.remove("virada");
             viradas[0].classList.add("acertadas");
