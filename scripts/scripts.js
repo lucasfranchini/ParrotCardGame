@@ -3,6 +3,7 @@ let timer=0;
 const deck = document.querySelector(".campo");
 let clock;
 let aleatorio = [];
+const imagens = ["bobrossparrot.gif","explodyparrot.gif","fiestaparrot.gif","metalparrot.gif","revertitparrot.gif", "tripletsparrot.gif","unicornparrot.gif"]
 iniciar();
 function iniciar (){
     while(numero_cartas<4 || numero_cartas>14 || numero_cartas%2 === 1){
@@ -22,11 +23,11 @@ function iniciar (){
     }
     aleatorio.sort(comparador);
     const cartas = document.querySelectorAll(".campo .carta");
-    for (let i=0,imagen_escolhida = 1;i<numero_cartas;i++){
+    for (let i=0,imagen_escolhida = 0;i<numero_cartas;i++){
         if(i%2 ===0 && i!== 0){
             imagen_escolhida++;
         }
-        cartas[aleatorio[i]].querySelectorAll("img")[1].setAttribute("src",`imagens/${imagen_escolhida}.gif`);
+        cartas[aleatorio[i]].querySelectorAll("img")[1].setAttribute("src",`imagens/${imagens[imagen_escolhida]}`);
     }
     clock =setInterval(relogio,1000);
 }
