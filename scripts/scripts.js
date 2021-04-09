@@ -1,4 +1,4 @@
-let numerocartas =0, numeroviradas =0,acertos =0,numerojogadas =0;
+let numeroCartas =0, numeroViradas =0,acertos =0,numeroJogadas =0;
 let timer=0;
 const deck = document.querySelector(".campo");
 let clock;
@@ -8,10 +8,10 @@ const imagens = ["bobrossparrot.gif","explodyparrot.gif","fiestaparrot.gif","met
 iniciar();
 
 function iniciar (){
-    while(numerocartas<4 || numerocartas>14 || numerocartas%2 === 1){
-        numerocartas = parseInt(prompt("com quantas cartas você quer jogar"));
+    while(numeroCartas<4 || numeroCartas>14 || numeroCartas%2 === 1){
+        numeroCartas = parseInt(prompt("com quantas cartas você quer jogar"));
     }
-    for (let i=0;i<numerocartas;i++){
+    for (let i=0;i<numeroCartas;i++){
         deck.innerHTML = `${deck.innerHTML}  
         <div class="carta" onclick="virar(this)">
             <div class="frente face">
@@ -25,11 +25,11 @@ function iniciar (){
     }
     aleatorio.sort(comparador);
     const cartas = document.querySelectorAll(".campo .carta");
-    for (let i=0,imagenescolhida = 0;i<numerocartas;i++){
+    for (let i=0,imagenEscolhida = 0;i<numeroCartas;i++){
         if(i%2 ===0 && i!== 0){
-            imagenescolhida++;
+            imagenEscolhida++;
         }
-        cartas[aleatorio[i]].querySelectorAll("img")[1].setAttribute("src",`imagens/${imagens[imagenescolhida]}`);
+        cartas[aleatorio[i]].querySelectorAll("img")[1].setAttribute("src",`imagens/${imagens[imagenEscolhida]}`);
     }
     clock =setInterval(relogio,1000);
 }
@@ -42,14 +42,14 @@ function relogio(){
     relogio.innerHTML = `${minutos}:${segundos}`;
 }
 
-function virar(cartavirada){
-    numeroviradas ++;
-    numerojogadas++;
-    cartavirada.children[0].classList.toggle("frente");
-    cartavirada.children[1].classList.toggle("virada"); 
-    if(numeroviradas ===2){
+function virar(cartaVirada){
+    numeroViradas ++;
+    numeroJogadas++;
+    cartaVirada.children[0].classList.toggle("frente");
+    cartaVirada.children[1].classList.toggle("virada"); 
+    if(numeroViradas ===2){
         const viradas=document.querySelectorAll(".campo .carta .virada");
-        numeroviradas= 0;
+        numeroViradas= 0;
         if(viradas[1].innerHTML === viradas[0].innerHTML){
             viradas[0].classList.remove("virada");
             viradas[1].classList.remove("virada");
@@ -61,7 +61,7 @@ function virar(cartavirada){
             document.querySelector(".campo").classList.add("esperando");
             setTimeout(desvirar,1000,viradas);
         }
-        if(acertos === numerocartas)
+        if(acertos === numeroCartas)
         {
             clearInterval(clock);
             setTimeout(recomeçar,300);
@@ -70,13 +70,13 @@ function virar(cartavirada){
 }
 
 function recomeçar(){
-    alert(`você ganhou em ${numerojogadas} jogadas e demorou ${timer} segundos` );
+    alert(`você ganhou em ${numeroJogadas} jogadas e demorou ${timer} segundos` );
     const resposta =prompt("gostaria de jogar de novo?(sim ou não)");
     if(resposta === "sim"){
-        numerocartas =0;
-        numeroviradas =0;
+        numeroCartas =0;
+        numeroViradas =0;
         acertos =0;
-        numerojogadas =0;
+        numeroJogadas =0;
         timer=0;
         deck.innerHTML = "";
         aleatorio = [];
